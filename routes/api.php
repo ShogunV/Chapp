@@ -17,14 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('/register', 'UserController@register');
+Route::post('/register', 'UserController@register');
 
-Route::get('/waitingroom', 'RoomController@index')->middleware('client_credentials');
-
-Route::post('/messages', 'MessageController@store')->middleware('client_credentials');
-
-Route::get('/messages', 'MessageController@index')->middleware('client_credentials');
-
-Route::post('/room', 'RoomController@store')->middleware('client_credentials');
-
-Route::delete('/room', 'RoomController@destroy')->middleware('client_credentials', 'creator');
+Route::middleware('client_credentials')->group(function () {
+    Route::get('/waitingroom', 'RoomController@index');
+    Route::post('/messages', 'MessageController@store');
+    Route::get('/messages', 'MessageController@index');
+    Route::post('/room', 'RoomController@store');
+    Route::delete('/room', 'RoomController@destroy')->middleware('creator');
+});

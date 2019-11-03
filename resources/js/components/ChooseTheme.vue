@@ -23,7 +23,6 @@ export default {
         changeTheme(newTheme){
             if(this.theme !== newTheme) {
                 this.theme = newTheme;
-                this.$emit('themeChanged', this.theme);
                 Event.$emit('themeChanged', this.theme);
                 Event.theme = this.theme;
             }

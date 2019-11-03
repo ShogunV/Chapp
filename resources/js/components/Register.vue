@@ -6,60 +6,60 @@
             <div class="card-body">
                 <form class="form-horizontal" role="form" method="POST">
 
-                    <div class="form-group" :class="{'has-error' : errors.name}">
+                    <div class="form-group">
                         <label for="name" class="col-md-4 offset-md-2 control-label">Name</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <input id="name" type="text" class="form-control" name="name" placeholder="Enter username..." v-model="name" v-focus required autofocus>
+                            <input id="name" type="text" class="form-control" :class="{'is-invalid' : errors.name}" name="name" placeholder="Enter username..." v-model="name" v-focus required autofocus>
 
-                                <span class="help-block" v-if="errors.name">
+                                <span class="help-block text-danger" v-if="errors.name">
                                     <strong>{{ errors.name[0] }}</strong>
                                 </span>
                             
                         </div>
                     </div>
 
-                    <div class="form-group" :class="{'has-error' : errors.email}">
+                    <div class="form-group">
                         <label for="email" class="col-md-4 offset-md-2 control-label">E-Mail Address</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <input id="email" type="email" class="form-control" name="email" placeholder="Enter fake email..." v-model="email" required>
+                            <input id="email" type="email" class="form-control" :class="{'is-invalid' : errors.email}" name="email" placeholder="Enter fake email..." v-model="email" required>
 
-                                <span class="help-block" v-if="errors.email">
+                                <span class="help-block text-danger" v-if="errors.email">
                                     <strong>{{ errors.email[0] }}</strong>
                                 </span>
                             
                         </div>
                     </div>
 
-                    <div class="form-group" :class="{'has-error' : errors.password}">
+                    <div class="form-group">
                         <label for="password" class="col-md-4 offset-md-2 control-label">Password</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Enter password..." v-model="password" required>
+                            <input id="password" type="password" class="form-control" :class="{'is-invalid' : errors.password}" name="password" placeholder="Enter password..." v-model="password" required>
 
-                                <span class="help-block" v-if="errors.password">
+                                <span class="help-block text-danger" v-if="errors.password">
                                     <strong>{{ errors.password[0] }}</strong>
                                 </span>
                             
                         </div>
                     </div>
 
-                    <div class="form-group" :class="{'has-error' : errors.password_confirmation}">
+                    <div class="form-group">
                         <label for="password-confirm" class="col-md-4 offset-md-2 control-label">Confirm Password</label>
 
                         <div class="col-md-8 offset-md-2">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password..." v-model="password_confirmation" required>
+                            <input id="password-confirm" type="password" class="form-control" :class="{'is-invalid' : errors.password_confirmation}" name="password_confirmation" placeholder="Confirm password..." v-model="password_confirmation" required>
 
-                                <span class="help-block" v-if="errors.password_confirmation">
+                                <span class="help-block text-danger" v-if="errors.password_confirmation">
                                     <strong>{{ errors.password_confirmation[0] }}</strong>
                                 </span>
 
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="form-group row">
+                        <div class="col text-center">
                             <button type="button" @click="submitRegForm" class="btn btn-primary">
                                 Register
                             </button>

@@ -7,20 +7,20 @@
             <div class="card-body">
                 <form class="form-horizontal" @submit.prevent="submit">
 
-                    <div class="form-group" :class="{'has-error' : errors}">
-                        <label for="name" class="col-md-4 control-label">Room name</label>
+                    <div class="form-group">
+                        <label for="name" class="offset-md-2 col-md-4 control-label">Room name</label>
 
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="name" v-model="name" v-focus required autofocus>
+                        <div class="offset-md-2 col-md-8">
+                            <input id="name" type="text" class="form-control" :class="{'is-invalid' : errors}" name="name" v-model="name" v-focus required autofocus>
 
-                            <span class="help-block" v-if="errors">
+                            <span class="help-block text-danger" v-if="errors">
                                 <strong>{{ errors.name[0] }}</strong>
                             </span>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="form-group row">
+                        <div class="col text-center">
                             <button type="submit" class="btn btn-primary">Create</button>
 
                             <router-link to="/waitingroom" class="btn btn-default pull-right">Back</router-link>
@@ -64,7 +64,6 @@ export default {
             }).then(response => {
                 this.$router.push('waitingroom');
             }).catch(e => {
-                console.log(e.response.data.errors);
                 this.errors = e.response.data.errors;
             })
         }
