@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,6 @@ Route::get('/', function () {
     return view('start');
 });
 
-Route::get('/{vue?}', function () {
+Route::get('/{path?}', function(){
     return view('start');
-})->where('vue', '[\/\w\.-]*');
+})->where('path', '.*');

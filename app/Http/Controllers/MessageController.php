@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Room;
-use App\Message;
-use Illuminate\Http\Request;
 use App\Events\MessageCreated;
+use App\Models\Message;
+use App\Models\Room;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,7 +36,7 @@ class MessageController extends Controller
     {
         $user = User::where('name', request()->user['name'])->first();
 
-        $message = $user->message()->create([
+        $message = $user->messages()->create([
             'message' => request()->get('message'),
             'room_id' => request()->get('room')
         ]);

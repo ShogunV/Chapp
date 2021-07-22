@@ -1,33 +1,25 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+require("./bootstrap");
 
-require('./bootstrap');
-
-window.Vue = require('vue');
-import VueRouter from 'vue-router';
-import router from './routes';
+import Vue from "vue/dist/vue";
+window.Vue = require("vue");
+import VueRouter from "vue-router";
+import router from "./Routes";
 Vue.use(VueRouter);
 
-import Auth from './Auth.js';
+import Auth from "./Auth.js";
 Vue.use(Auth);
 
-router.beforeEach(
-    (to, from, next) => {
-        if(to.matched.some(record => record.meta.forVisitors)){
-            if(Vue.auth.isAuthenticated()){
-                next({path: '/waitingroom'})
-            } else next()
-        }
-        else if(to.matched.some(record => record.meta.forAuth)){
-            if(!Vue.auth.isAuthenticated()){
-                next({path: '/login'})
-            } else next()
-        } else next()
-    }
-);
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.forVisitors)) {
+    if (Vue.auth.isAuthenticated()) {
+      next({ path: "/waitingroom" });
+    } else next();
+  } else if (to.matched.some(record => record.meta.forAuth)) {
+    if (!Vue.auth.isAuthenticated()) {
+      next({ path: "/login" });
+    } else next();
+  } else next();
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -37,20 +29,20 @@ router.beforeEach(
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('start', require('./components/Start.vue').default);
-Vue.component('navbar-auth-links', require('./components/NavbarAuthLinks.vue').default);
+Vue.component("start", require("./components/Start.vue").default);
+Vue.component(
+  "navbar-auth-links",
+  require("./components/NavbarAuthLinks.vue").default
+);
 
 window.Event = new Vue();
 
-Vue.directive('focus', {
-   // When the bound element is inserted into the DOM...
-   inserted: function (el) {
+Vue.directive("focus", {
+  // When the bound element is inserted into the DOM...
+  inserted: function(el) {
     // Focus the element
     el.focus();
-    }
+  }
 });
 
 /**
@@ -60,7 +52,7 @@ Vue.directive('focus', {
  */
 
 const app = new Vue({
-    el: '#app',
-    // render: h => h(App),
-    router: router
+  el: "#app",
+  // render: h => h(App),
+  router: router
 });

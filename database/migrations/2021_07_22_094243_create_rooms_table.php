@@ -14,10 +14,10 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('creator_id')->unsigned();
+            $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->foreignId('creator_id')->constrained('users');
         });
     }
 

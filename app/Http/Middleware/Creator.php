@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Room;
+use App\Models\Room;
 use Closure;
-use Response;
+use Illuminate\Http\Request;
 
 class Creator
 {
@@ -15,14 +15,14 @@ class Creator
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $room = Room::find($request->id);
         $user = $request->user;
-        if ($user && $room && $room->creator() === $user['id']) {
+        if ($user && $room && $room->creator_id === $user['id']) {
             return $next($request);
         } else {
-            return Response::json(['error' => 'Not creator!!!']);
+            return response()->json(['error' => 'Not creator!!!']);
         }
     }
 }

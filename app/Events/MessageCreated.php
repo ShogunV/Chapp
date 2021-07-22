@@ -2,9 +2,8 @@
 
 namespace App\Events;
 
-use App\User;
-use App\Message;
-use App\Room;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;

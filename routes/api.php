@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', 'UserController@register');
+Route::post('/register', [UserController::class, 'register']);
 
-Route::middleware('client_credentials')->group(function () {
-    Route::get('/waitingroom', 'RoomController@index');
-    Route::post('/messages', 'MessageController@store');
-    Route::get('/messages', 'MessageController@index');
-    Route::post('/room', 'RoomController@store');
-    Route::delete('/room', 'RoomController@destroy')->middleware('creator');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/waitingroom', [RoomController::class, 'index']);
+    Route::post('/messages', [MessageController::class, 'store']);
+    Route::get('/messages', [MessageController::class, 'index']);
+    Route::post('/room', [RoomController::class, 'store']);
+    Route::delete('/room', [RoomController::class, 'destroy'])->middleware('creator');
 });

@@ -14,11 +14,11 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
             $table->text('message');
-            $table->integer('user_id')->unsigned();
-            $table->integer('room_id')->unsigned();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('room_id')->constrained()->onDelete('cascade');
         });
     }
 

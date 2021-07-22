@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Room;
-use App\User;
-use App\Message;
 use App\Events\RoomCreated;
 use App\Events\RoomDestroyed;
+use App\Models\Message;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -102,7 +101,7 @@ class RoomController extends Controller
     public function destroy(Request $request)
     {
         $room = Room::find($request->id);
-        
+
         broadcast(new RoomDestroyed($room))->toOthers();
 
         $room->messages()->delete();

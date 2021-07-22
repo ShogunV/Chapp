@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Room;
+use App\Models\Room;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,7 +15,7 @@ class RoomCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-     public $room;
+    public $room;
 
     /**
      * Create a new event instance.
@@ -34,6 +34,6 @@ class RoomCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('waitingroom');
+        return new PrivateChannel('waiting-room');
     }
 }
