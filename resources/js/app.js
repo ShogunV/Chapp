@@ -1,7 +1,6 @@
 require("./bootstrap");
 
 import Vue from "vue/dist/vue";
-window.Vue = require("vue");
 import VueRouter from "vue-router";
 import router from "./Routes";
 Vue.use(VueRouter);
@@ -30,10 +29,7 @@ router.beforeEach((to, from, next) => {
  */
 
 Vue.component("start", require("./components/Start.vue").default);
-Vue.component(
-  "navbar-auth-links",
-  require("./components/NavbarAuthLinks.vue").default
-);
+Vue.component("navbar", require("./components/Navbar.vue").default);
 
 window.Event = new Vue();
 
